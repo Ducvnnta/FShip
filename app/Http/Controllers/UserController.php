@@ -2,19 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Http\Requests\PaginateRequest;
+use App\Models\User;
+use App\Services\User\UserServiceInterface;
+use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class PostController extends Controller
+class UserController extends Controller
 {
+    use ApiResponser;
+
+    /**
+     * @var $userService
+     */
+    protected $userService;
+
+    public function __construct(
+        UserServiceInterface $userService
+    ) {
+        $this->userService= $userService;
+    }
+
+
     /**
      * Display a listing of the resource.
+     * @param  App\Http\Requests\PaginateRequest
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getListAdminUser(PaginateRequest $request)
     {
-        //
+        $perPage       = $request->per_page;
+        $page          = $request->page;
+        $result = $this->userService->getListAdminUser($perPage, $page);
+        $message = trans('Danh sách khác hàng');
+        $statusCode = Response::HTTP_OK;
+
+        return $this->successResponse($result, $message, $statusCode);
     }
 
     /**
@@ -44,7 +69,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(User $post)
     {
         //
     }
@@ -55,7 +80,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(User $post)
     {
         //
     }
@@ -67,7 +92,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, User $post)
     {
         //
     }
@@ -78,8 +103,8 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(User $post)
     {
-        
+
     }
 }
