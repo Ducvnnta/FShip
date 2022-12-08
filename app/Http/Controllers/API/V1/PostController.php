@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\V1;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -80,6 +80,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        
+
     }
 }

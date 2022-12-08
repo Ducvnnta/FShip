@@ -4,5 +4,5 @@ namespace App\Services\User;
 
 interface UserServiceInterface
 {
-    public function getListAdminUser();
+    public function getListAdminUser($perPage, $page);
 }

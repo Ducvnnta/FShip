@@ -21,26 +21,26 @@ class AppServiceProvider extends ServiceProvider
     public function registerServices() //user
     {
         $this->app->bind(
-            \App\Services\Post\PostService::class,
             \App\Services\Post\PostServiceInterface::class,
+            \App\Services\Post\PostService::class,
         );
 
         $this->app->bind(
-            \App\Services\User\UserService::class,
             \App\Services\User\UserServiceInterface::class,
+            \App\Services\User\UserService::class,
         );
     }
 
     public function registerRepository() //admin
     {
         $this->app->bind(
+            \App\Repositories\Post\PostRepositoryInterface::class,
             \App\Repositories\Post\PostReponsitory::class,
-            \App\Repositories\Post\PostRepositoryInterFace::class,
         );
 
         $this->app->bind(
-            \App\Repositories\User\UserReponsitory::class,
-            \App\Repositories\User\UserRepositoryInterFace::class,
+            \App\Repositories\User\UserRepositoryInterface::class,
+            \App\Repositories\User\UserRepository::class,
         );
 
     }
