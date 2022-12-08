@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\V1;
 
-use App\Http\Requests\PaginateRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginationRequest;
 use App\Models\User;
 use App\Services\User\UserServiceInterface;
 use App\Traits\ApiResponser;
@@ -31,7 +32,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getListAdminUser(PaginateRequest $request)
+    public function getListAdminUser(PaginationRequest $request)
     {
         $perPage       = $request->per_page;
         $page          = $request->page;

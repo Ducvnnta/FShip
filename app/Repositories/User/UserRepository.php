@@ -4,7 +4,7 @@ namespace App\Repositories\User;
 
 use App\Repositories\BaseRepository;
 
-class UserReponsitory extends BaseRepository implements UserRepositoryInterFace
+class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
     //lấy model tương ứng
     public function getModel()
@@ -12,7 +12,12 @@ class UserReponsitory extends BaseRepository implements UserRepositoryInterFace
         return \App\Models\User::class;
     }
 
-    public function getUser()
+    /**
+     *getUser
+     *
+     * @param
+     * */
+    public function getListAdminUser()
     {
         return $this->model->select('name')->take(5)->get();
     }
