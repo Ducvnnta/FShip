@@ -25,9 +25,11 @@ class RegisterUserRequest extends ApiValidationRequest
     public function rules()
     {
         $email = $this->get('email');
+        $password = $this->get('password');
         return [
-            'email' => ['required', 'email:rfc,dns', 'max:100', new UserCompletedRegistration($email)]
-            // 'device_token' => 'required',
+            'email' => ['required', 'email:rfc,dns', 'max:100', new UserCompletedRegistration($email)],
+            'password' => ['nullable', 'max:100']
+
         ];
     }
 

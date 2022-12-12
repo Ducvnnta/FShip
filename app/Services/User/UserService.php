@@ -44,4 +44,78 @@ class UserService implements UserServiceInterface
             'is_admin' => $adminUser->is_admin
         ];
     }
+
+        /**
+     * @param App\Http\Requests\RegisterUserRequest $request
+     *
+     * @return bool
+     */
+    public function registerUser($request)
+    {
+        DB::beginTransaction();
+        try {
+            $dataRegisterUser = $request->only(['email']);
+            /** Check User Exist */
+            $checkUserExist = $this->checkUserExist($dataRegisterUser);
+            // if ($checkUserExist) {
+                $user = $checkUserExist;
+                /** Reset User Verify */
+                $checkUserExist->update(['email_verified_at' => null]);
+            // } else {
+            //     $checkUserDeleted = $this->checkUserDeleted($dataRegisterUser);
+
+            //     if($checkUserDeleted) {
+            //         Log::info('User registration with deleted user #ID: ' . $checkUserDeleted->id ?? '');
+            //         $checkUserDeleted->userDetailWithTrashed()->forceDelete();
+            //         $checkUserDeleted->favoriteHospital()->delete();
+            //         $checkUserDeleted->wipRemindConfig()->delete();
+            //         $checkUserDeleted->pushNotificationDelivery()->delete();
+            //         $checkUserDeleted->registrationTokens()->delete();
+            //         $checkUserDeleted->forceDelete();
+            //     }
+
+            //     $user = $this->userRepository->create(
+            //         $dataRegisterUser
+            //     );
+            // }
+
+            // $checkToken = $this->checkTokenDeviceExists($request->device_token);
+            // if ($checkToken) {
+            //     /** Push noti and send mail verify */
+            //     /** Push notification */
+            //     $pushNoti = $this->pushNotificationService->sendCreateUser($user, $request->device_token);
+            //     if (!$pushNoti->hasFailures()) {
+            //         /** Send mail verify */
+            //         $user->sendEmailVerificationNotification();
+            //     } else {
+            //         DB::rollBack();
+            //         return false;
+            //     }
+            // } else {
+            //     /** Only send mail verify */
+            //     $user->sendEmailVerificationNotification();
+            // }
+
+            DB::commit();
+            return true;
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            report($e);
+            return false;
+        }
+
+    }
+
+    /**
+     * @param  string $deviceToken
+     * @return bool
+     */
+    function checkTokenDeviceExists($deviceToken) {
+        if (!empty($deviceToken)) {
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -4,10 +4,25 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterUserRequest;
+use App\Services\User\UserServiceInterface;
+use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    use ApiResponser;
+
+    /**
+     * @var $userService
+     */
+    protected $userService;
+
+    public function __construct(
+        UserServiceInterface $userService
+    ) {
+        $this->userService= $userService;
+    }
+
 
     /**
      * Register user by email

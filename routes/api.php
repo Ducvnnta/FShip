@@ -19,5 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'API'], function () {
     Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function () {
         Route::get('/list', 'UserController@getListAdminUser');
+        Route::group(['prefix' => 'auth'], function () {
+            //resgister
+            Route::post('register', 'API\AuthController@register');
+        });
     });
 });
