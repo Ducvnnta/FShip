@@ -5,11 +5,14 @@ namespace App\Services\User;
 use App\Repositories\User\UserReponsitory;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Traits\RenderPagination;
+use Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserService implements UserServiceInterface
 {
     use RenderPagination;
-   /**
+    /**
      * @var $userRepository
      * @var $sendMailService
      */
@@ -45,7 +48,7 @@ class UserService implements UserServiceInterface
         ];
     }
 
-        /**
+    /**
      * @param App\Http\Requests\RegisterUserRequest $request
      *
      * @return bool
@@ -54,64 +57,35 @@ class UserService implements UserServiceInterface
     {
         DB::beginTransaction();
         try {
-            $dataRegisterUser = $request->only(['email']);
-            /** Check User Exist */
-            $checkUserExist = $this->checkUserExist($dataRegisterUser);
-            // if ($checkUserExist) {
-                $user = $checkUserExist;
-                /** Reset User Verify */
-                $checkUserExist->update(['email_verified_at' => null]);
-            // } else {
-            //     $checkUserDeleted = $this->checkUserDeleted($dataRegisterUser);
-
-            //     if($checkUserDeleted) {
-            //         Log::info('User registration with deleted user #ID: ' . $checkUserDeleted->id ?? '');
-            //         $checkUserDeleted->userDetailWithTrashed()->forceDelete();
-            //         $checkUserDeleted->favoriteHospital()->delete();
-            //         $checkUserDeleted->wipRemindConfig()->delete();
-            //         $checkUserDeleted->pushNotificationDelivery()->delete();
-            //         $checkUserDeleted->registrationTokens()->delete();
-            //         $checkUserDeleted->forceDelete();
-            //     }
-
-            //     $user = $this->userRepository->create(
-            //         $dataRegisterUser
-            //     );
-            // }
-
-            // $checkToken = $this->checkTokenDeviceExists($request->device_token);
-            // if ($checkToken) {
-            //     /** Push noti and send mail verify */
-            //     /** Push notification */
-            //     $pushNoti = $this->pushNotificationService->sendCreateUser($user, $request->device_token);
-            //     if (!$pushNoti->hasFailures()) {
-            //         /** Send mail verify */
-            //         $user->sendEmailVerificationNotification();
-            //     } else {
-            //         DB::rollBack();
-            //         return false;
-            //     }
-            // } else {
-            //     /** Only send mail verify */
-            //     $user->sendEmailVerificationNotification();
-            // }
-
+            $user = $this->userRepository->create([
+                'email' =>  $request->email,
+                'name' =>  $request->name,
+                'password' => Hash::make($request->password),
+            ]);
             DB::commit();
-            return true;
-
+            return $user;
         } catch (Exception $e) {
             DB::rollBack();
             report($e);
             return false;
         }
+    }
 
+    /**
+     * @param  string $email
+     * @return mixed
+     */
+    public function checkUserExist($email)
+    {
+        return $this->userRepository->findByEmail($email);
     }
 
     /**
      * @param  string $deviceToken
      * @return bool
      */
-    function checkTokenDeviceExists($deviceToken) {
+    function checkTokenDeviceExists($deviceToken)
+    {
         if (!empty($deviceToken)) {
             return true;
         }

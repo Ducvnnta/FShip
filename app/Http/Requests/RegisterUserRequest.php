@@ -4,9 +4,11 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\ApiValidationRequest;
 use App\Rules\UserCompletedRegistration;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterUserRequest extends ApiValidationRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,11 +26,11 @@ class RegisterUserRequest extends ApiValidationRequest
      */
     public function rules()
     {
-        $email = $this->get('email');
-        $password = $this->get('password');
+
         return [
-            'email' => ['required', 'email:rfc,dns', 'max:100', new UserCompletedRegistration($email)],
-            'password' => ['nullable', 'max:100']
+            'name' => 'required|unique:users,email',
+            'email' => 'required|unique:users,email|email:rfc,dns|max:100',
+            'password' => 'required|string|max:100'
 
         ];
     }
