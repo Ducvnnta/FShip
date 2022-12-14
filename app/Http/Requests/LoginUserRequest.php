@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\ApiValidationRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterUserRequest extends FormRequest
+class LoginUserRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,12 +24,11 @@ class RegisterUserRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
-            'name' => 'required|unique:users,email',
-            'email' => 'required|unique:users,email|email:rfc,dns|max:100',
-            'password' => 'required|string|max:100'
-
+            'email' => 'required|email:rfc,dns|max:100',
+            'password' => 'required',
+            // 'device_id' => 'required',
+            // 'device_token' => 'required',
         ];
     }
 
@@ -41,23 +40,11 @@ class RegisterUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => trans('Email là không được để trống'),
-            'email.max' => trans('Email nhiều nhất có ::attribute' ),
-            'email.email' => trans('Email phải đúng định dạng'),
+            'email.required' => "Email là bắt buộc",
+            'email.max' => "Email tối thiểu 100 kí tự",
+            'password.required' => "Password là bắt buộc",
+            // 'device_id.required' => trans('validation.required'),
             // 'device_token.required' => trans('validation.required'),
         ];
-
-
-    }
-
-
-
-    /**
-     * getAttributes
-     *
-     * @return void
-     */
-    public function getAttributes() {
-        return $this->validated();
     }
 }

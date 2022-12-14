@@ -8,7 +8,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <title>Toidicode.com</title>
 </head>
-<body >
+<body style="margin-right: 10em">
     <section class="h-100 h-custom" >
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
