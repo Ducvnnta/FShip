@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V1\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/** Đăng kí **/
+Route::get('/', function () { return view('welcome');});
+Route::post('/registration', [AuthController::class, 'register'])->name('user.registration');
+
+/** Đăng nhập **/
+Route::get('/login', function () { return view('web.login');});
+Route::post('/login', [AuthController::class, 'login'])->name('user.login');
+
+
+
+

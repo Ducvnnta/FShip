@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel 8 form validation</title>
+    <title>Đăng ký</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('api/v1/auth/register') }}">
+        <form method="POST" action="{{ route('user.registration') }}">
 
             {{ csrf_field() }}
 
