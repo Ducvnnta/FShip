@@ -47,4 +47,13 @@ class LoginUserRequest extends FormRequest
             // 'device_token.required' => trans('validation.required'),
         ];
     }
+
+    /**
+     * getAttributes
+     *
+     * @return void
+     */
+    public function getAttributes() {
+        return $this->validated();
+    }
 }

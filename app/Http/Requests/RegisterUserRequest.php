@@ -31,6 +31,7 @@ class RegisterUserRequest extends FormRequest
             'password' => 'required|string|max:100'
 
         ];
+
     }
 
     /**

@@ -34,6 +34,11 @@ class AuthController extends Controller
         return view('welcome');
     }
 
+    public function viewlogin()
+    {
+        return view('web.login');
+    }
+
     /**
      * Register user by email
      *
@@ -74,10 +79,20 @@ class AuthController extends Controller
         return back()->with('success', 'User created successfully.');
     }
 
-    public function login(Request $request)
+
+
+    public function login()
     {
         $credentials = request(['email', 'password']);
 
+        dd($this->submit);
+        if($this->submit == 'register')
+        {
+
+        } elseif($this->submit == 'login')
+        {
+
+        }
         if (!$token = auth("admin")->attempt($credentials)) {
             $message = 'Đăng nhập thành công';
             $statusCode = Response::HTTP_UNAUTHORIZED;

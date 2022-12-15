@@ -17,9 +17,17 @@
       <div class="row d-flex justify-content-center">
         <div class="col-lg-8">
           <h2 class="fw-bold mb-5">Sign up now</h2>
-          <form>
+          @if(Session::has('success'))
+          <div class="alert alert-success">
+              {{ Session::get('success') }}
+              @php
+                  Session::forget('success');
+              @endphp
+          </div>
+          @endif
+          <form >
             <!-- 2 column grid layout with text inputs for the first and last names -->
-            <div class="row">
+            {{-- <div class="row">
               <div class="col-md-6 mb-4">
                 <div class="form-outline">
                   <input type="text" id="form3Example1" class="form-control" />
@@ -32,17 +40,23 @@
                   <label class="form-label" for="form3Example2">Last name</label>
                 </div>
               </div>
-            </div>
+            </div> --}}
 
             <!-- Email input -->
             <div class="form-outline mb-4">
               <input type="email" id="form3Example3" class="form-control" />
+              @if ($errors->has('email'))
+              <span class="text-danger">{{ $errors->first('email') }}</span>
+              @endif
               <label class="form-label" for="form3Example3">Email address</label>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
               <input type="password" id="form3Example4" class="form-control" />
+              @if ($errors->has('password'))
+              <span class="text-danger">{{ $errors->first('password') }}</span>
+              @endif
               <label class="form-label" for="form3Example4">Password</label>
             </div>
 
