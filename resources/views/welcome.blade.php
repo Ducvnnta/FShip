@@ -51,7 +51,11 @@
             </div>
 
             <div class="form-group">
-                <button class="btn btn-success btn-submit">Submit</button>
+                <button class="btn btn-success btn-submit" action="{{ route('user.login') }}">Submit</button>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success btn-submit">Login</button>
             </div>
         </form>
     </div>

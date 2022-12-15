@@ -24,7 +24,7 @@ Route::group(['namespace' => 'API'], function () {
     });
     Route::group(['prefix' => 'auth'], function () {
         //resgister
-        Route::post('/register-be', [AuthController::class, 'registerBE']);
+        // Route::post('/register-be', [AuthController::class, 'registerBE']);
         // Route::post('login', [AuthController::class, 'login']);
     });
 
