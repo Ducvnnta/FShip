@@ -1,85 +1,57 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <title>Toidicode.com</title>
-</head>
-<body style="margin-right: 10em">
-    <section class="h-100 h-custom" >
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-8 col-xl-6">
-              <div class="card rounded-3">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp"
-                  class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
-                  alt="Sample photo">
-                <div class="card-body p-4 p-md-5">
-                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Info</h3>
+@extends("welcome")
+@section('title', 'Trang chủ')
+@section('content')
+<div style="background: rgba(57, 145, 172, 0.067);">
+    <div class="container">
 
-                  <form class="px-md-2">
+        <h1>Register Form</h1>
 
-                    <div class="form-outline mb-4">
-                      <input type="text" id="form3Example1q" class="form-control" />
-                      <label class="form-label" for="form3Example1q">Name</label>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-
-                        <div class="form-outline datepicker">
-                          <input type="text" class="form-control" id="exampleDatepicker1" />
-                          <label for="exampleDatepicker1" class="form-label">Select a date</label>
-                        </div>
-
-                      </div>
-                      <div class="col-md-6 mb-4">
-
-                        <select class="select">
-                          <option value="1" disabled>Gender</option>
-                          <option value="2">Female</option>
-                          <option value="3">Male</option>
-                          <option value="4">Other</option>
-                        </select>
-
-                      </div>
-                    </div>
-
-                    <div class="mb-4">
-
-                      <select class="select">
-                        <option value="1" disabled>Class</option>
-                        <option value="2">Class 1</option>
-                        <option value="3">Class 2</option>
-                        <option value="4">Class 3</option>
-                      </select>
-
-                    </div>
-
-                    <div class="row mb-4 pb-2 pb-md-0 mb-md-5">
-                      <div class="col-md-6">
-
-                        <div class="form-outline">
-                          <input type="text" id="form3Example1w" class="form-control" />
-                          <label class="form-label" for="form3Example1w">Registration code</label>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
-
-                  </form>
-
-                </div>
-              </div>
-            </div>
-          </div>
+        @if(Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+            @php
+                Session::forget('success');
+            @endphp
         </div>
-      </section>
-</body>
-</html>
+        @endif
 
+
+        <form method="POST" action="{{ route('user.registration') }}">
+
+            {{ csrf_field() }}
+
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" name="name" class="form-control" placeholder="Name">
+                @if ($errors->has('name'))
+                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" name="password" class="form-control" placeholder="Password">
+                @if ($errors->has('password'))
+                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <strong>Email:</strong>
+                <input type="text" name="email" class="form-control" placeholder="Email">
+                @if ($errors->has('email'))
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                @endif
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success btn-submit" action="{{route('user.login')}}">Submit</button>
+            </div>
+        </form>
+        <div>
+            <a class="btn btn-sm btn-success" href="{{route('auth.login')}}">Login</a>
+        </div>
+    </div>
+</div>
+</html>
+@endsection

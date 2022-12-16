@@ -85,14 +85,6 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        dd($this->submit);
-        if($this->submit == 'register')
-        {
-
-        } elseif($this->submit == 'login')
-        {
-
-        }
         if (!$token = auth("admin")->attempt($credentials)) {
             $message = 'Đăng nhập thành công';
             $statusCode = Response::HTTP_UNAUTHORIZED;

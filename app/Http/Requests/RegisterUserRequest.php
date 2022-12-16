@@ -29,7 +29,6 @@ class RegisterUserRequest extends FormRequest
             'name' => 'required|unique:users,email',
             'email' => 'required|unique:users,email|email:rfc,dns|max:100',
             'password' => 'required|string|max:100'
-
         ];
 
     }

@@ -25,7 +25,10 @@
               @endphp
           </div>
           @endif
-          <form >
+          <form method="POST" action="{{ route('user.login') }}">
+
+            {{ csrf_field() }}
+
             <!-- 2 column grid layout with text inputs for the first and last names -->
             {{-- <div class="row">
               <div class="col-md-6 mb-4">
@@ -46,7 +49,7 @@
             <div class="form-outline mb-4">
               <input type="email" id="form3Example3" class="form-control" />
               @if ($errors->has('email'))
-              <span class="text-danger">{{ $errors->first('email') }}</span>
+              <span class="text-danger">{{$errors->first('email')}}</span>
               @endif
               <label class="form-label" for="form3Example3">Email address</label>
             </div>
@@ -55,7 +58,7 @@
             <div class="form-outline mb-4">
               <input type="password" id="form3Example4" class="form-control" />
               @if ($errors->has('password'))
-              <span class="text-danger">{{ $errors->first('password') }}</span>
+              <span class="text-danger">{{$errors->first('password')}}</span>
               @endif
               <label class="form-label" for="form3Example4">Password</label>
             </div>
