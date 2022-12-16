@@ -1,63 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="vn">
+
 <head>
-    <title>Đăng ký</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <title>FShip</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="content-language" content="vi">
+    <title>@yield('title')</title>
+    <base href="{{ asset('') }}">
+    <meta name="description" content="Ship Fast-Free-Full">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="Owlcarousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="Owlcarousel/dist/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="app.css" type="text/css">
 </head>
-<body style="background: rgba(57, 145, 172, 0.067);">
-    <div class="container">
 
-        <h1>Register Form</h1>
+<body>
+    @include("web.header")
+    @yield('content')
+    @include("web.footer")
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="OwlCarousel/dist/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        // C1
+        // $(document).ready(function(){
+        //     $(".btn-search").on("click",function(){
+        //    if($(".search-box").hasClass("show"))
+        //    {
+        //     ($(".search-box").removeClass("show"))
+        //    }else{
+        //     ($(".search-box").addClass("show"))
+        //    }
 
-        @if(Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-            @php
-                Session::forget('success');
-            @endphp
-        </div>
-        @endif
+        //     });
+        // });
+        // C2
+        $(document).ready(function() {
+            $(".btn-search").on("click", function() {
+                $(".search-box").toggleClass("show")
+            });
+            var owlslide = $('.owl-carousel-slide');
+            owlslide.owlCarousel({
+                loop:true,
+                margin:10,
+                nav:false,
+                dots: false,
+                autoplay: true,
+                autoplayHoverPause: true,
+                autoplayTimeout: 2500,
+                responsive:{
+                     0:{
+                         items:1
+                        },
+                    600:{
+                        items:1
+                    },
+                    1000:{
+                        items:3
+                    }
+                }
+            })
+            var owlmatch = $('.owl-carousel-match');
+            owlmatch.owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: false,
+                autoplay: false,
+                autoplayHoverPause: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 2
+                    }
+                }
+            })
+            $('.NextBtnmatch').click(function() {
+                owlmatch.trigger('next.owl.carousel');
+            })
+            $('.PrevBtnmatch').click(function() {
+                owlmatch.trigger('prev.owl.carousel');
+            })
+            var owlmatch = $('.owl-carousel-match');
+            owlmatch.owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: false,
+                autoplay: false,
+                autoplayHoverPause: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 2
+                    }
+                }
+            })
+            $('.NextBtnmatch').click(function() {
+                owlmatch.trigger('next.owl.carousel');
+            })
+            $('.PrevBtnmatch').click(function() {
+                owlmatch.trigger('prev.owl.carousel');
+            })
+            var owlbxh = $('.owl-carousel-bxh');
+            owlbxh.owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                items: 1,
+                dots: false,
+                autoplay: false,
+                autoplayHoverPause: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            })
+            $('.NextBtnbxh').click(function() {
+                owlbxh.trigger('next.owl.carousel');
+            })
+            $('.PrevBtnbxh').click(function() {
+                owlbxh.trigger('prev.owl.carousel');
+            })
+            var owlnewsday = $('.owl-carousel-newsday');
+            owlnewsday.owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: false,
+                autoplay: false,
+                autoplayHoverPause: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            })
+            $('.NextBtnnewsday').click(function() {
+                owlnewsday.trigger('next.owl.carousel');
+            })
+            $('.PrevBtnnewsday').click(function() {
+                owlnewsday.trigger('prev.owl.carousel');
+            })
 
-        <form method="POST" action="{{ route('user.registration') }}">
+            var owlnewsdetail = $('.owl-carousel-newsdetail');
+            owlnewsdetail.owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: false,
+                autoplay: false,
+                autoplayHoverPause: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 2
+                    }
+                }
+            })
+            $('.NextBtnnewsdeatil').click(function() {
+                owlnewsdetail.trigger('next.owl.carousel');
+            })
+            $('.PrevBtnnewsdetail').click(function() {
+                owlnewsdetail.trigger('prev.owl.carousel');
+            })
 
-            {{ csrf_field() }}
+            var owlschedule = $('.owl-carousel-schedule');
+            owlschedule.owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: false,
+                autoplay: false,
+                autoplayHoverPause: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            })
+            $('.NextBtnSchedule').click(function() {
+                owlschedule.trigger('next.owl.carousel');
+            })
+            $('.PrevBtnSchedule').click(function() {
+                owlschedule.trigger('prev.owl.carousel');
+            })
 
-            <div class="form-group">
-                <label>Name:</label>
-                <input type="text" name="name" class="form-control" placeholder="Name">
-                @if ($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                @endif
-            </div>
+        });
 
-            <div class="form-group">
-                <label>Password:</label>
-                <input type="password" name="password" class="form-control" placeholder="Password">
-                @if ($errors->has('password'))
-                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                @endif
-            </div>
-
-            <div class="form-group">
-                <strong>Email:</strong>
-                <input type="text" name="email" class="form-control" placeholder="Email">
-                @if ($errors->has('email'))
-                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                @endif
-            </div>
-
-            <div class="form-group">
-                <button class="btn btn-success btn-submit" action="{{ route('user.login') }}">Submit</button>
-            </div>
-
-            {{-- <div class="form-group">
-                <button class="btn btn-primary" type="submit" href="{{ route('auth.login') }}">Login</button>
-            </div> --}}
-        </form>
-    </div>
-</body>
-</html>
+    </script>
+    <html>

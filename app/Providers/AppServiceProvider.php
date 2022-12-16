@@ -52,6 +52,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view() -> share('name', 'Laravel');
     }
+
+
 }

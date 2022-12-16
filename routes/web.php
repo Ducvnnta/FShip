@@ -23,10 +23,10 @@ Route::post('/registration', [AuthController::class, 'register'])->name('user.re
 
 /** Đăng nhập **/
 Route::get('/login', function () {
-    return view('web.login')->name('auth.login');
-});
+    return view('web.login');
+})->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('user.login');
-Route::get('/login', [AuthController::class, 'viewlogin'])->name('auth.login');
+Route::get('/auth-login', [AuthController::class, 'viewlogin'])->name('auth.login');
 
 
 Route::get('/error', function () {
